@@ -52,7 +52,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -71,9 +71,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  connect: _connect2.default
 	};
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	'use strict';
 
@@ -103,9 +103,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    assign: assign
 	};
 
-/***/ },
+/***/ }),
 /* 2 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	'use strict';
 
@@ -133,9 +133,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = warning;
 
-/***/ },
+/***/ }),
 /* 3 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -166,9 +166,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = Provider;
 
-/***/ },
+/***/ }),
 /* 4 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -189,75 +189,75 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var defaultMapStateToProps = function defaultMapStateToProps(state) {
-	  return {};
+	    return {};
 	}; // eslint-disable-line no-unused-vars
 	var defaultMapDispatchToProps = function defaultMapDispatchToProps(dispatch) {
-	  return { dispatch: dispatch };
+	    return { dispatch: dispatch };
 	};
 
 	function connect(mapStateToProps, mapDispatchToProps) {
-	  var shouldSubscribe = Boolean(mapStateToProps);
-	  var mapState = mapStateToProps || defaultMapStateToProps;
-	  var app = getApp();
+	    var shouldSubscribe = Boolean(mapStateToProps);
+	    var mapState = mapStateToProps || defaultMapStateToProps;
+	    var app = getApp();
 
-	  var mapDispatch = void 0;
-	  if (typeof mapDispatchToProps === 'function') {
-	    mapDispatch = mapDispatchToProps;
-	  } else if (!mapDispatchToProps) {
-	    mapDispatch = defaultMapDispatchToProps;
-	  } else {
-	    mapDispatch = (0, _wrapActionCreators2.default)(mapDispatchToProps);
-	  }
-
-	  return function wrapWithConnect(pageConfig) {
-
-	    function handleChange(options) {
-	      if (!this.unsubscribe) {
-	        return;
-	      }
-
-	      var state = this.store.getState();
-	      var mappedState = mapState(state, options);
-	      if (!this.data || (0, _shallowEqual2.default)(this.data, mappedState)) {
-	        return;
-	      }
-	      this.setData(mappedState);
+	    var mapDispatch = void 0;
+	    if (typeof mapDispatchToProps === 'function') {
+	        mapDispatch = mapDispatchToProps;
+	    } else if (!mapDispatchToProps) {
+	        mapDispatch = defaultMapDispatchToProps;
+	    } else {
+	        mapDispatch = (0, _wrapActionCreators2.default)(mapDispatchToProps);
 	    }
 
-	    var _onLoad = pageConfig.onLoad,
-	        _onUnload = pageConfig.onUnload;
+	    return function wrapWithConnect(pageConfig) {
+
+	        function handleChange(options) {
+	            if (!this.unsubscribe) {
+	                return;
+	            }
+
+	            var state = this.store.getState();
+	            var mappedState = mapState.call(this, state, options);
+	            if (!this.data || (0, _shallowEqual2.default)(this.data, mappedState)) {
+	                return;
+	            }
+	            this.setData(mappedState);
+	        }
+
+	        var _onLoad = pageConfig.onLoad,
+	            _onUnload = pageConfig.onUnload;
 
 
-	    function onLoad(options) {
-	      this.store = app.store;
-	      if (!this.store) {
-	        (0, _warning2.default)("Store对象不存在!");
-	      }
-	      if (shouldSubscribe) {
-	        this.unsubscribe = this.store.subscribe(handleChange.bind(this, options));
-	        handleChange.call(this, options);
-	      }
-	      if (typeof _onLoad === 'function') {
-	        _onLoad.call(this, options);
-	      }
-	    }
+	        function onLoad(options) {
+	            this.store = app.store;
+	            if (!this.store) {
+	                (0, _warning2.default)("Store对象不存在!");
+	            }
+	            if (shouldSubscribe) {
+	                this.unsubscribe = this.store.subscribe(handleChange.bind(this, options));
+	                handleChange.call(this, options);
+	            }
+	            if (typeof _onLoad === 'function') {
+	                _onLoad.call(this, options);
+	            }
+	        }
 
-	    function onUnload() {
-	      if (typeof _onUnload === 'function') {
-	        _onUnload.call(this);
-	      }
-	      typeof this.unsubscribe === 'function' && this.unsubscribe();
-	    }
+	        function onUnload() {
+	            if (typeof _onUnload === 'function') {
+	                _onUnload.call(this);
+	            }
+	            typeof this.unsubscribe === 'function' && this.unsubscribe();
+	        }
 
-	    return (0, _Object.assign)({}, pageConfig, mapDispatch(app.store.dispatch), { onLoad: onLoad, onUnload: onUnload });
-	  };
+	        return (0, _Object.assign)({}, pageConfig, mapDispatch(app.store.dispatch), { onLoad: onLoad, onUnload: onUnload });
+	    };
 	}
 
 	module.exports = connect;
 
-/***/ },
+/***/ }),
 /* 5 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	"use strict";
 
@@ -286,9 +286,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = shallowEqual;
 
-/***/ },
+/***/ }),
 /* 6 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	'use strict';
 
@@ -329,7 +329,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = wrapActionCreators;
 
-/***/ }
+/***/ })
 /******/ ])
 });
 ;
